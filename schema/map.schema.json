@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "Edge": {
+      "properties": {
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "corridor",
+            "escalator",
+            "stairs",
+            "elevator",
+            "gate"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "distance_m": {
+          "title": "Distance M",
+          "type": "number"
+        },
+        "heading_deg": {
+          "title": "Heading Deg",
+          "type": "number"
+        },
+        "instruction": {
+          "$ref": "#/$defs/Text"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "type",
+        "distance_m",
+        "heading_deg",
+        "instruction"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "Floor": {
+      "properties": {
+        "floor_id": {
+          "title": "Floor Id",
+          "type": "string"
+        },
+        "elevation_m": {
+          "title": "Elevation M",
+          "type": "number"
+        }
+      },
+      "required": [
+        "floor_id",
+        "elevation_m"
+      ],
+      "title": "Floor",
+      "type": "object"
+    },
+    "Landmark": {
+      "properties": {
+        "landmark_id": {
+          "title": "Landmark Id",
+          "type": "string"
+        },
+        "node_id": {
+          "title": "Node Id",
+          "type": "string"
+        },
+        "sign_texts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sign Texts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "landmark_id",
+        "node_id",
+        "sign_texts"
+      ],
+      "title": "Landmark",
+      "type": "object"
+    },
+    "Node": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "floor_id": {
+          "title": "Floor Id",
+          "type": "string"
+        },
+        "position": {
+          "$ref": "#/$defs/Position"
+        },
+        "name": {
+          "$ref": "#/$defs/Text"
+        }
+      },
+      "required": [
+        "id",
+        "floor_id",
+        "position",
+        "name"
+      ],
+      "title": "Node",
+      "type": "object"
+    },
+    "Panorama": {
+      "properties": {
+        "pano_id": {
+          "title": "Pano Id",
+          "type": "string"
+        },
+        "node_id": {
+          "title": "Node Id",
+          "type": "string"
+        },
+        "image_url": {
+          "title": "Image Url",
+          "type": "string"
+        },
+        "north_yaw_deg": {
+          "title": "North Yaw Deg",
+          "type": "number"
+        },
+        "captured_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Captured At"
+        },
+        "is_example": {
+          "title": "Is Example",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "pano_id",
+        "node_id",
+        "image_url",
+        "north_yaw_deg",
+        "captured_at",
+        "is_example"
+      ],
+      "title": "Panorama",
+      "type": "object"
+    },
+    "Poi": {
+      "properties": {
+        "poi_id": {
+          "title": "Poi Id",
+          "type": "string"
+        },
+        "node_id": {
+          "title": "Node Id",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "train_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "express",
+                "allstop"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Train Type"
+        },
+        "name": {
+          "$ref": "#/$defs/Text"
+        },
+        "aliases": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "verified": {
+          "title": "Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "poi_id",
+        "node_id",
+        "category",
+        "name",
+        "verified"
+      ],
+      "title": "Poi",
+      "type": "object"
+    },
+    "Position": {
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "z": {
+          "title": "Z",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "Text": {
+      "properties": {
+        "en": {
+          "title": "En",
+          "type": "string"
+        },
+        "ko": {
+          "title": "Ko",
+          "type": "string"
+        }
+      },
+      "required": [
+        "en",
+        "ko"
+      ],
+      "title": "Text",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "map_id": {
+      "title": "Map Id",
+      "type": "string"
+    },
+    "version": {
+      "title": "Version",
+      "type": "string"
+    },
+    "name": {
+      "$ref": "#/$defs/Text"
+    },
+    "provenance": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Provenance",
+      "type": "object"
+    },
+    "coordinate_system": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Coordinate System",
+      "type": "object"
+    },
+    "floors": {
+      "items": {
+        "$ref": "#/$defs/Floor"
+      },
+      "title": "Floors",
+      "type": "array"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "title": "Nodes",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "title": "Edges",
+      "type": "array"
+    },
+    "pois": {
+      "items": {
+        "$ref": "#/$defs/Poi"
+      },
+      "title": "Pois",
+      "type": "array"
+    },
+    "landmarks": {
+      "items": {
+        "$ref": "#/$defs/Landmark"
+      },
+      "title": "Landmarks",
+      "type": "array"
+    },
+    "panoramas": {
+      "items": {
+        "$ref": "#/$defs/Panorama"
+      },
+      "title": "Panoramas",
+      "type": "array"
+    }
+  },
+  "required": [
+    "map_id",
+    "version",
+    "name",
+    "provenance",
+    "coordinate_system",
+    "floors",
+    "nodes",
+    "edges",
+    "pois",
+    "landmarks",
+    "panoramas"
+  ],
+  "title": "MapData",
+  "type": "object"
+}
