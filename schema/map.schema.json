@@ -31,6 +31,11 @@
         },
         "instruction": {
           "$ref": "#/$defs/Text"
+        },
+        "closed": {
+          "default": false,
+          "title": "Closed",
+          "type": "boolean"
         }
       },
       "required": [
@@ -103,6 +108,22 @@
         },
         "name": {
           "$ref": "#/$defs/Text"
+        },
+        "area": {
+          "anyOf": [
+            {
+              "enum": [
+                "paid",
+                "free"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Area"
         }
       },
       "required": [
@@ -202,6 +223,11 @@
         },
         "verified": {
           "title": "Verified",
+          "type": "boolean"
+        },
+        "closed": {
+          "default": false,
+          "title": "Closed",
           "type": "boolean"
         }
       },

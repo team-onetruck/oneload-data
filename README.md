@@ -19,7 +19,8 @@ The photos in `panos/` are **CC0 samples of other stations** from [Poly Haven](h
 
 1. Edit `maps/seoul-station.json` and bump `version` (e.g. `2026-10-22.1` → `2026-10-29.1`). Clients holding the old version get `409 MAP_VERSION_MISMATCH` and reload.
 2. A panorama's arrow is `north_yaw_deg + edge heading_deg`: record where north sits in each photo, and the compass bearing of each passage (north = 0°, clockwise).
-3. Check locally, then push:
+3. Fields the backend's action plan uses, all optional until surveyed: node `area` (`paid` inside the ticket gates, `free` outside), edge `type: "gate"` for each ticket gate, `closed: true` on a passage or POI that is out of service, and POI categories `tickets` (with `train_type`), `platform`, `exit`, `card_refund` (deposit refund machine). Without them the plan simply has fewer steps; nothing is guessed.
+4. Check locally, then push:
 
    ```sh
    pip install "jsonschema>=4.23,<5" && python tools/validate.py
