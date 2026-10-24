@@ -11,7 +11,7 @@ Indoor map and street-view photos for Hangil, kept apart from code so the survey
 
 ## What is real
 
-`maps/seoul-station.json`: only the floors of the AREX ticket points (express B2, all-stop B3) and platforms (B7) are confirmed, from the [AREX official guide](https://www.airportrailroad.com/co/steUsfGud.do) on 2026-10-22. Positions, passages, distances, headings and sign texts are placeholders until the field survey.
+`maps/seoul-station.json`: confirmed from the [AREX station guide](https://www.airportrailroad.com/train/normal/info/010/0) (checked 2026-10-23) are the floors of the AREX ticket points (express B2, all-stop B3) and platforms (B7), and that the Line 1/4 transfer meets AREX on B3. Sign texts come from the AREX station map and from public photos compiled by R3 (see `provenance` in the file); none are field-checked. Positions, passages, distances and headings are placeholders until the field survey.
 
 The photos in `panos/` are **CC0 samples of other stations** from [Poly Haven](https://polyhaven.com) (Hamburg Hbf, a subway passage, Amsterdam Noord and Vijzelgracht); every panorama using them has `"is_example": true`. Replace them with the Seoul Station shoot, and **blur faces before committing**: this repo is public.
 
@@ -26,7 +26,8 @@ The photos in `panos/` are **CC0 samples of other stations** from [Poly Haven](h
    pip install "jsonschema>=4.23,<5" && python tools/validate.py
    ```
 
-4. Deploy: run the backend workflow (`gh workflow run ci.yml -R team-onetruck/oneload-backend`). It validates this repo again against the backend model before switching the server over.
+5. Deploy: run the backend workflow (`gh workflow run ci.yml -R team-onetruck/oneload-backend`). It validates this repo again against the backend model before switching the server over.
+6. oneload_agent keeps a copy in `mocks/maps/` and its CI fails until that copy matches: open a PR there with the new file.
 
 When the backend's map model changes, regenerate the schema from a backend checkout:
 
